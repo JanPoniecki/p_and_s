@@ -34,11 +34,64 @@ int	swap_will_sort(t_intarr *ia)
 	return (res);
 }
 
+int	pick_nearest(t_intarr *ia, int s, int s2)
+{
+	int	s_dist;
+	int	s2_dist;
+
+	if (s <= ia->len - s)
+		s_dist = s;
+	else
+		s_dist = ia->len - s;
+	if (s2 <= ia->len - s2)
+		s2_dist = s2;
+	else
+		s2_dist = ia->len - s2;
+	if (s_dist <= s2_dist)
+		return (s);
+	else
+		return (s2);
+}
+
+int	find_nearest_index(t_intarr *ia, int s, int s2)
+{
+	int	i;
+
+	i = 0;
+	while (i < ia->len)
+	{
+		if (ia->ints[i] < ia->ints[s])
+			s = i;
+		i++;
+	}
+	i = 0;
+	if (s == 0)
+		s2++;
+	while (i < ia->len)
+	{
+		if (ia->ints[i] < ia->ints[s2] && ia->ints[i] > ia->ints[s])
+			s2 = i;
+		i++;
+	}
+	ft_printf("s %d s2 %d\n", s, s2);
+	return (pick_nearest(ia, s, s2));
+}
+
+void	move_nearest(t_intarr *ia, char *moves)
+{
+	int	s;
+
+	s = find_nearest_index(ia, 0, 0);
+	ft_printf("first one to move: %d\n", s);
+}
+
 int	main(int argc, char **argv)
 {
-	t_intarr iaa;
-	t_intarr iab;
+	t_intarr	iaa;
+	t_intarr	iab;
+	char		*moves;
 
+	moves = ft_calloc(1000, sizeof(char));
 	iaa.ints = ft_calloc(argc - 1, sizeof(int));
 	iaa.len = argc -1;
 	iaa.sorting = 1;
@@ -47,6 +100,7 @@ int	main(int argc, char **argv)
 	iab.sorting = -1;
 	fill_up_array(&iaa, argv);
 	simplify_array(&iaa);
-	ft_printf("sorted %d\n", is_sorted(&iaa));
+	move_nearest(&iaa, moves);
 	free(iaa.ints);
+	free(moves);
 }
