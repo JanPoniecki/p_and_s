@@ -62,7 +62,7 @@ void	simplify_array(t_intarr *ia)
 	while (i < ia->len)
 	{
 		min = next_one(temp_arr, ia->len);
-		ia->ints[min] = i;
+		ia->ints[min] = i + 10;
 		temp_arr[min] = 2147483647;
 		i++;
 	}

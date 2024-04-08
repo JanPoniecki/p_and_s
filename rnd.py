@@ -1,10 +1,19 @@
 import random
+import sys
 
-ints = input("type nr of integers, 10 is default")
-if ints == "":
-	ints = 10
+# ints = input("type nr of integers, 10 is default")
+# if ints == "":
+# 	ints = 10
+ints = int(sys.argv[1])
 i = 0;
 
+result = []
+
 while (i < int(ints)):
-	print(f"{random.randint(-100, 100)} ", end="")
-	i += 1
+	nr = random.randint(-100, 100)
+	if nr not in result:
+		result.append(nr)
+		i += 1
+
+for r in result:
+	print(f'{r} ', end="")
