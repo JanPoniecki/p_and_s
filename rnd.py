@@ -18,5 +18,3 @@ while (i < int(ints)):
 
 for r in result:
 	print(f'{r} ', end="")
-
-os.system('clear')

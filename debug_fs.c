@@ -1,54 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   debug_fs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/09 20:30:55 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/09 20:51:05 by jponieck         ###   ########.fr       */
+/*   Created: 2024/04/09 20:35:12 by jponieck          #+#    #+#             */
+/*   Updated: 2024/04/09 20:55:01 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps.h"
 
-void	append_move(t_intarr *ia, char *move)
-{
-	int	i;
-
-	i = 0;
-	while (ia->moves[i])
-		i++;
-	while (*move)
-	{
-		ia->moves[i] = *move;
-		i++;
-		move++;
-	}
-	ia->moves[i] = '\n';
-}
-
-void	shift_up(t_intarr *ia)
+void	print_args(char **argv, int argc)
 {
 	int	i;
 
 	i = 1;
-	while (i < ia->len)
-	{
-		ia->ints[i - 1] = ia->ints[i];
-		i++;
-	}
-	ia->ints[i - 1] = 0;
+	while (i < argc)
+		ft_printf("%s ", argv[i++]);
+	ft_printf("\n");
 }
 
-void	shift_down(t_intarr *ia)
+void	print_arrays(t_intarr *ia, t_intarr *ib, int argc)
 {
 	int	i;
 
-	i = ia->len + 1;
-	while (i > 0)
+	i = 0;
+	while (i < argc - 1)
 	{
-		ia->ints[i] = ia->ints[i - 1];
-		i--;
+		ft_printf("%d\t%d\n", ia->ints[i], ib->ints[i]);
+		i++;
 	}
+	ft_printf("----\n");
 }

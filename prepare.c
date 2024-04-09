@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   prepare.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/08 22:31:06 by jponieck          #+#    #+#             */
+/*   Updated: 2024/04/09 20:52:47 by jponieck         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ps.h"
 
 void	decrease(int nr, int *arr, int len)
@@ -16,10 +28,10 @@ void	decrease(int nr, int *arr, int len)
 	if (c > -1)
 	{
 		decrease(nr -1, arr, len);
-		arr[c] = nr - 1; 
+		arr[c] = nr - 1;
 	}
 	else
-		return;
+		return ;
 }
 
 void	fill_up_array(t_intarr *ia, char **src)
@@ -29,7 +41,7 @@ void	fill_up_array(t_intarr *ia, char **src)
 	i = 1;
 	while (src[i])
 	{
-		ia->ints[i - 1] = ft_atoi(src[i]);;
+		ia->ints[i - 1] = ft_atoi(src[i]);
 		i++;
 	}
 }
@@ -54,10 +66,11 @@ void	simplify_array(t_intarr *ia)
 {
 	int	*temp_arr;
 	int	min;
+	int	i;
 
 	temp_arr = ft_calloc(ia->len, sizeof(int));
 	ft_memcpy(temp_arr, ia->ints, ia->len * sizeof(int));
-	int i = 0;
+	i = 0;
 	decrease(2147483647, temp_arr, ia->len);
 	while (i < ia->len)
 	{

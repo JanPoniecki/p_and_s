@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   moves.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/09 20:31:13 by jponieck          #+#    #+#             */
+/*   Updated: 2024/04/09 21:15:06 by jponieck         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ps.h"
 
 void	rotate(t_intarr *ia)
@@ -36,30 +48,6 @@ void	rrotate(t_intarr *ia)
 		append_move(ia, "rra");
 	else
 		append_move(ia, "rrb");
-}
-void	shift_up(t_intarr *ia)
-{
-	int	i;
-
-	i = 1;
-	while (i < ia->len)
-	{
-		ia->ints[i - 1] = ia->ints[i];
-		i++;
-	}
-	ia->ints[i - 1] = 0;
-}
-
-void	shift_down(t_intarr *ia)
-{
-	int	i;
-
-	i = ia->len + 1;
-	while (i > 0)
-	{
-		ia->ints[i] = ia->ints[i - 1];
-		i--;
-	}
 }
 
 void	swap(t_intarr *ia, t_intarr *ib)
