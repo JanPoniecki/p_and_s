@@ -1,5 +1,6 @@
 import random
 import sys
+import os
 
 # ints = input("type nr of integers, 10 is default")
 # if ints == "":
@@ -17,3 +18,5 @@ while (i < int(ints)):
 
 for r in result:
 	print(f'{r} ', end="")
+
+os.system('clear')

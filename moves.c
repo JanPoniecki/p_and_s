@@ -47,7 +47,9 @@ void	shift_up(t_intarr *ia)
 		ia->ints[i - 1] = ia->ints[i];
 		i++;
 	}
+	ia->ints[i - 1] = 0;
 }
+
 void	shift_down(t_intarr *ia)
 {
 	int	i;
@@ -60,7 +62,7 @@ void	shift_down(t_intarr *ia)
 	}
 }
 
-void	swap(t_intarr *ia)
+void	swap(t_intarr *ia, t_intarr *ib)
 {
 	int	temp;
 
@@ -70,7 +72,7 @@ void	swap(t_intarr *ia)
 	if (ia->sorting == 1)
 		append_move(ia, "sa");
 	else
-		append_move(ia, "sb");
+		append_move(ib, "sb");
 }
 
 void	push(t_intarr *from, t_intarr *to)
@@ -83,5 +85,5 @@ void	push(t_intarr *from, t_intarr *to)
 	if (from->sorting == 1)
 		append_move(from, "pb");
 	else
-		append_move(from, "pa");
+		append_move(to, "pa");
 }
