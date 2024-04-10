@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 20:35:12 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/09 20:55:01 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/10 21:54:47 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,14 @@ void	print_arrays(t_intarr *ia, t_intarr *ib, int argc)
 		i++;
 	}
 	ft_printf("----\n");
+}
+
+void print_flat(t_intarr *ia, int argc)
+{
+	int	i;
+
+	i = 0;
+	while (i < argc - 1)
+		ft_printf("%d ", ia->ints[i++]);
+	ft_printf("\n");
 }

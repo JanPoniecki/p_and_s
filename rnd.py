@@ -18,3 +18,6 @@ while (i < int(ints)):
 
 for r in result:
 	print(f'{r} ', end="")
+
+with open("log.txt", "w") as log:
+	log.write(str(result))

@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 20:55:31 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/09 21:15:24 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/10 21:55:23 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_intarr
 	char	col;
 	int		next_n;
 	int		args;
+	int		moves_count;
 }	t_intarr;
 
 void	decrease(int nr, int *arr, int len);
@@ -46,5 +47,8 @@ void	shift_up(t_intarr *ia);
 void	shift_down(t_intarr *ia);
 int		is_sorted(t_intarr *ia);
 int		swap_will_sort(t_intarr *ia);
+void	end_program(char *er, t_intarr *ia, t_intarr *ib);
+char	*check_args(char **argv, t_intarr *ia, t_intarr *ib);
+void	print_flat(t_intarr *ia, int argc);
 
 #endif

@@ -6,11 +6,23 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 20:30:55 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/09 20:51:05 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/10 22:50:27 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps.h"
+
+char	*re_calloc(char *src, int size)
+{
+	char	*new;
+	int		src_len;
+
+	src_len = ft_strlen(src);
+	new = ft_calloc((src_len + size), sizeof(char));
+	ft_strlcpy(new, src, src_len + size);
+	free(src);
+	return (new);
+}
 
 void	append_move(t_intarr *ia, char *move)
 {
@@ -26,6 +38,12 @@ void	append_move(t_intarr *ia, char *move)
 		move++;
 	}
 	ia->moves[i] = '\n';
+	ia->moves_count++;
+	if (ia->moves_count * 4 > (1000 - 4))
+	{
+		ia->moves = re_calloc(ia->moves, 1000);
+		ia->moves = 0;
+	}
 }
 
 void	shift_up(t_intarr *ia)
@@ -45,7 +63,7 @@ void	shift_down(t_intarr *ia)
 {
 	int	i;
 
-	i = ia->len + 1;
+	i = ia->len;
 	while (i > 0)
 	{
 		ia->ints[i] = ia->ints[i - 1];
