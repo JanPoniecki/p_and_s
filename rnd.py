@@ -11,7 +11,7 @@ i = 0;
 result = []
 
 while (i < int(ints)):
-	nr = random.randint(-100, 100)
+	nr = random.randint(-1000, 1000)
 	if nr not in result:
 		result.append(nr)
 		i += 1
