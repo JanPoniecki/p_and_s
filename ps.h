@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 20:55:31 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/10 21:55:23 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/11 20:15:28 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_intarr
 	int		next_n;
 	int		args;
 	int		moves_count;
+	int		alg_id;
 }	t_intarr;
 
 void	decrease(int nr, int *arr, int len);
@@ -50,5 +51,8 @@ int		swap_will_sort(t_intarr *ia);
 void	end_program(char *er, t_intarr *ia, t_intarr *ib);
 char	*check_args(char **argv, t_intarr *ia, t_intarr *ib);
 void	print_flat(t_intarr *ia, int argc);
+int		al_1(t_intarr *ia, t_intarr *ib, char **argv);
+int		al_2(t_intarr *ia, t_intarr *ib, char **argv);
+void	al_3(t_intarr *ia, t_intarr *ib, char **argv);
 
 #endif

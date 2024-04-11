@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 20:30:55 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/10 22:50:27 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/11 21:35:55 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ void	append_move(t_intarr *ia, char *move)
 	}
 	ia->moves[i] = '\n';
 	ia->moves_count++;
-	if (ia->moves_count * 4 > (1000 - 4))
+	// ft_printf("moves len %d\n", ft_strlen(ia->moves));
+	if (ia->moves_count * 4 > (10000 - 4))
 	{
-		ia->moves = re_calloc(ia->moves, 1000);
-		ia->moves = 0;
+		ft_printf("recalloc\n");
+		ia->moves = re_calloc(ia->moves, 10000);
+		ia->moves_count = 0;
 	}
 }
 

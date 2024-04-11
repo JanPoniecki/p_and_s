@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 20:40:15 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/09 22:42:11 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/11 15:20:51 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,28 @@ int	find_nearest_index(t_intarr *ia, int s, int s2, int i)
 	return (pick_nearest(ia, s, s2));
 }
 
+int	next_one_1(int *iarr, int len)
+{
+	int	i;
+	int	min;
+
+	i = 0;
+	min = 0;
+	while (i < len)
+	{
+		if (iarr[i] < iarr[min])
+			min = i;
+		i++;
+	}
+	return (iarr[min]);
+}
+
 void	move_nearest(t_intarr *ia)
 {
 	int	s;
 
+	if (ia->alg_id == 2)
+		ia->next_n = next_one_1(ia->ints, ia->len);
 	s = find_nearest_index(ia, 0, 0, 0);
 	if (s <= ia->len / 2)
 	{

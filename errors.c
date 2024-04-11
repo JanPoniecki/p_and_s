@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 20:16:44 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/10 21:57:29 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/11 15:50:44 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,21 @@
 
 void	end_program(char *er, t_intarr *ia, t_intarr *ib)
 {
+	int	n;
+	int	i;
+
+	n = 0;
+	i = 0;
 	if (!er)
 	{
 		ft_printf("%s", ia->moves);
+		while(ia->moves[i])
+		{
+			if (ia->moves[i] == '\n')
+				n++;
+			i++;
+		}
+		ft_printf("number of moves is: %d\n", n);
 		free(ia->ints);
 		free(ib->ints);
 		free(ia->moves);
