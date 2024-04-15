@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 20:55:31 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/11 20:15:28 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/15 19:44:03 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ typedef struct s_intarr
 	int		moves_count;
 	int		alg_id;
 }	t_intarr;
+
+typedef struct s_node
+{
+	int	index;
+	int	rbs;
+	int	ras;
+}
 
 void	decrease(int nr, int *arr, int len);
 void	fill_up_array(t_intarr *ia, char **src);

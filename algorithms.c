@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 22:56:51 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/11 21:16:08 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/12 18:43:22 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,20 @@ void	al_3(t_intarr *ia, t_intarr *ib, char **argv)
 	if (ia->ints[0] == 12 && ia->ints[1] == 10)
 		ft_strlcpy(ia->moves, "ra\n", 4);
 	end_program(NULL, ia, ib);
+}
+
+void	bubble_sort(t_intarr *ia, t_intarr *ib, int i, int s)
+{
+	s = ia->len
+	while (s > 2)
+	{
+		while (i < ia->len)
+		{
+			if (ia->ints[0] > ia->ints[1] && i < s)
+				swap(ia, ib);
+			rotate(ia);
+			i++;
+		}
+		s--;
+	}
 }
