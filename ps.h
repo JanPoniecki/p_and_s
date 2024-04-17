@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 20:55:31 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/15 19:44:03 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/17 23:28:31 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ typedef struct s_intarr
 
 typedef struct s_node
 {
-	int	index;
+	int	b_index;
 	int	rbs;
 	int	ras;
-}
+	int	rb_dir;
+	int	ra_dir;
+}	t_node;
 
 void	decrease(int nr, int *arr, int len);
 void	fill_up_array(t_intarr *ia, char **src);
@@ -61,5 +63,11 @@ void	print_flat(t_intarr *ia, int argc);
 int		al_1(t_intarr *ia, t_intarr *ib, char **argv);
 int		al_2(t_intarr *ia, t_intarr *ib, char **argv);
 void	al_3(t_intarr *ia, t_intarr *ib, char **argv);
+void	al_4(t_intarr *ia, t_intarr *ib, char **argv);
+int		absolute(int x);
+void	set_direction(t_node *cheapest, int way_a, int way_b);
+void	find_b_buddy(t_intarr *ia, t_intarr *ib, t_node *cheapest, int a_index);
+char	is_in_stack(t_intarr *ia, int x);
+void	meet_buddies(t_intarr *ia, t_intarr *ib, t_node *cpst);
 
 #endif

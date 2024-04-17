@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 20:47:07 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/11 22:26:40 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/17 19:59:18 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	main(int argc, char **argv)
 	iab.len = 0;
 	iab.sorting = -1;
 	check_args(argv, &iaa, &iab);
+	al_4(&iaa, &iab, argv);
 	if (argc == 4)
 		al_3(&iaa, &iab, argv);
 	else if (al_1(&iaa, &iab, argv) <= al_2(&iaa, &iab, argv))

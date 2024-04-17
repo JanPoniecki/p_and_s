@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 22:56:51 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/12 18:43:22 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/17 21:10:12 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,13 @@ int	al_2(t_intarr *ia, t_intarr *ib, char **argv)
 
 void	al_3(t_intarr *ia, t_intarr *ib, char **argv)
 {
-	ia->alg_id = 3;
-	ft_bzero(ia->moves, ft_strlen(ia->moves));
-	fill_up_array(ia, argv);
-	simplify_array(ia);
+	if (argv)
+	{
+		ia->alg_id = 3;
+		ft_bzero(ia->moves, ft_strlen(ia->moves));
+		fill_up_array(ia, argv);
+		simplify_array(ia);
+	}
 	if (ia->ints[0] == 10 && ia->ints[1] == 12)
 		ft_strlcpy(ia->moves, "rra\nsa\n", 8);
 	if (ia->ints[0] == 11 && ia->ints[1] == 10)
@@ -74,21 +77,5 @@ void	al_3(t_intarr *ia, t_intarr *ib, char **argv)
 		ft_strlcpy(ia->moves, "ra\nsa\n", 7);
 	if (ia->ints[0] == 12 && ia->ints[1] == 10)
 		ft_strlcpy(ia->moves, "ra\n", 4);
-	end_program(NULL, ia, ib);
-}
-
-void	bubble_sort(t_intarr *ia, t_intarr *ib, int i, int s)
-{
-	s = ia->len
-	while (s > 2)
-	{
-		while (i < ia->len)
-		{
-			if (ia->ints[0] > ia->ints[1] && i < s)
-				swap(ia, ib);
-			rotate(ia);
-			i++;
-		}
-		s--;
-	}
+	// end_program(NULL, ia, ib);
 }

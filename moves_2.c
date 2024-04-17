@@ -6,11 +6,32 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 20:40:15 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/11 15:20:51 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/17 23:28:07 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps.h"
+
+void	meet_buddies(t_intarr *ia, t_intarr *ib, t_node *cpst)
+{
+	while(cpst->rbs > 0)
+	{
+		if (cpst->rb_dir == 1)
+			rotate(ib);
+		else
+			rrotate(ib);
+		cpst->rbs--;
+	}
+	while(cpst->ras > 0)
+	{
+		if (cpst->ra_dir == 1)
+			rotate(ia);
+		else
+			rrotate(ia);
+		cpst->ras--;
+	}
+	push(ib, ia);
+}
 
 int	pick_nearest(t_intarr *ia, int s, int s2)
 {

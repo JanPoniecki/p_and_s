@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 20:31:13 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/10 19:45:34 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/17 23:34:48 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	rrotate(t_intarr *ia)
 	}
 	ia->ints[0] = temp;
 	if (ia->sorting == 1)
-		append_move(ia, "rra");
+		ft_printf("rra\n");
 	else
-		append_move(ia, "rrb");
+		ft_printf("rrb\n");
 }
 
 void	swap(t_intarr *ia, t_intarr *ib)

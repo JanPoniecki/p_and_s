@@ -6,11 +6,25 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 20:30:55 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/11 21:35:55 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/17 23:03:09 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps.h"
+
+char	is_in_stack(t_intarr *ia, int x)
+{
+	int	i;
+	i = 0;
+
+	while (i < ia->len)
+	{
+		if (ia->ints[i] == x)
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 char	*re_calloc(char *src, int size)
 {
