@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 22:56:51 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/17 21:10:12 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/18 22:22:55 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,24 +58,22 @@ int	al_2(t_intarr *ia, t_intarr *ib, char **argv)
 	return (n);
 }
 
-void	al_3(t_intarr *ia, t_intarr *ib, char **argv)
+void	al_3(t_intarr *ia, t_intarr *ib, int max_a)
 {
-	if (argv)
+	if (ia->ints[0] == max_a - 2 && ia->ints[1] == max_a)
 	{
-		ia->alg_id = 3;
-		ft_bzero(ia->moves, ft_strlen(ia->moves));
-		fill_up_array(ia, argv);
-		simplify_array(ia);
+		rrotate(ia, 0);
+		swap(ia, ib);
 	}
-	if (ia->ints[0] == 10 && ia->ints[1] == 12)
-		ft_strlcpy(ia->moves, "rra\nsa\n", 8);
-	if (ia->ints[0] == 11 && ia->ints[1] == 10)
-		ft_strlcpy(ia->moves, "sa\n", 4);
-	if (ia->ints[0] == 11 && ia->ints[1] == 12)
-		ft_strlcpy(ia->moves, "rra\n", 5);
-	if (ia->ints[0] == 12 && ia->ints[1] == 11)
-		ft_strlcpy(ia->moves, "ra\nsa\n", 7);
-	if (ia->ints[0] == 12 && ia->ints[1] == 10)
-		ft_strlcpy(ia->moves, "ra\n", 4);
-	// end_program(NULL, ia, ib);
+	if (ia->ints[0] == max_a - 1 && ia->ints[1] == max_a - 2)
+		swap(ia, ib);
+	if (ia->ints[0] == max_a - 1 && ia->ints[1] == max_a)
+		rrotate(ia, 0);
+	if (ia->ints[0] == max_a && ia->ints[1] == max_a - 1)
+	{
+		rotate(ia, 0);
+		swap(ia, ib);
+	}
+	if (ia->ints[0] == max_a && ia->ints[1] == max_a - 2)
+		rotate(ia, 0);
 }

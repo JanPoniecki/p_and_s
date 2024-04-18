@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 18:49:35 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/17 23:27:24 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/18 23:57:20 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,23 +69,28 @@ void	sort_4(t_intarr *ia, t_intarr *ib, int i, t_node *cpst)
 			find_b_buddy(ia, ib, cpst, i);
 		i++;
 	}
+	ft_printf("b len is : %d\n", ib->len);
 	ft_printf("chosen b is %d, ras %d, rbs %d, radir %d, rbdir %d\n", cpst->b_index, cpst->ras, cpst->rbs, cpst->ra_dir, cpst->rb_dir);
+	if (cpst->b_index == 2147483647)
+		return;
 	meet_buddies(ia, ib, cpst);
-	print_arrays(ia, ib, ia->len + ib->len + 1);
-	exit (0);
 }
 
 void	al_4(t_intarr *ia, t_intarr *ib, char **argv)
 {
 	t_node	cheapest;
+	int		max_a;
 
 	ia->alg_id = 4;
 	ft_bzero(ia->moves, ft_strlen(ia->moves));
 	fill_up_array(ia, argv);
 	simplify_array(ia);
+	print_arrays(ia, ib, ia->len + ib->len + 1);
+	max_a = ia->len + 9;
 	while (ia->len > 3)
 		push(ia, ib);
-	print_arrays(ia, ib, ia->len + ib->len + 1);
+	// al_3(ia, ib, max_a);
 	while (ib->len > 0)
 		sort_4(ia, ib, 0, &cheapest);
+	print_arrays(ia, ib, ia->len + ib->len + 1);
 }

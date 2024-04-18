@@ -6,13 +6,13 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 20:31:13 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/17 23:34:48 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/18 22:52:14 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps.h"
 
-void	rotate(t_intarr *ia)
+void	rotate(t_intarr *ia, int dbl)
 {
 	int	temp;
 	int	i;
@@ -25,13 +25,18 @@ void	rotate(t_intarr *ia)
 		i++;
 	}
 	ia->ints[i - 1] = temp;
-	if (ia->sorting == 1)
-		append_move(ia, "ra");
-	else
-		append_move(ia, "rb");
+	if (dbl == 0)
+	{
+		if (ia->sorting == 1)
+			ft_printf("ra\n");
+		else
+			ft_printf("rb\n");
+	}
+	else if (ia->sorting == 1)
+		ft_printf("rr\n");
 }
 
-void	rrotate(t_intarr *ia)
+void	rrotate(t_intarr *ia, int dbl)
 {
 	int	temp;
 	int	i;
@@ -44,10 +49,15 @@ void	rrotate(t_intarr *ia)
 		i--;
 	}
 	ia->ints[0] = temp;
-	if (ia->sorting == 1)
-		ft_printf("rra\n");
-	else
-		ft_printf("rrb\n");
+	if (dbl == 0)
+	{
+		if (ia->sorting == 1)
+			ft_printf("rra\n");
+		else
+			ft_printf("rrb\n");
+	}
+	else if (ia->sorting == 1)
+		ft_printf("rrr\n");
 }
 
 void	swap(t_intarr *ia, t_intarr *ib)
@@ -58,9 +68,9 @@ void	swap(t_intarr *ia, t_intarr *ib)
 	ia->ints[0] = ia->ints[1];
 	ia->ints[1] = temp;
 	if (ia->sorting == 1)
-		append_move(ia, "sa");
+		ft_printf("sa\n");
 	else
-		append_move(ib, "sb");
+		ft_printf("sb\n");
 }
 
 void	push(t_intarr *from, t_intarr *to)
@@ -71,7 +81,7 @@ void	push(t_intarr *from, t_intarr *to)
 	shift_up(from);
 	from->len--;
 	if (from->sorting == 1)
-		append_move(from, "pb");
+		ft_printf("pb\n");
 	else
-		append_move(to, "pa");
+		ft_printf("pa\n");
 }

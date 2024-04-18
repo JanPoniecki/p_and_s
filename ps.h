@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 20:55:31 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/17 23:28:31 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/18 22:27:23 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	decrease(int nr, int *arr, int len);
 void	fill_up_array(t_intarr *ia, char **src);
 int		next_one(int *iarr, int len);
 void	simplify_array(t_intarr *ia);
-void	rotate(t_intarr *ia);
-void	rrotate(t_intarr *ia);
+void	rotate(t_intarr *ia, int dbl);
+void	rrotate(t_intarr *ia, int dbl);
 void	append_move(t_intarr *ia, char *move);
 void	push(t_intarr *from, t_intarr *to);
 void	swap(t_intarr *ia, t_intarr *ib);
@@ -62,7 +62,7 @@ char	*check_args(char **argv, t_intarr *ia, t_intarr *ib);
 void	print_flat(t_intarr *ia, int argc);
 int		al_1(t_intarr *ia, t_intarr *ib, char **argv);
 int		al_2(t_intarr *ia, t_intarr *ib, char **argv);
-void	al_3(t_intarr *ia, t_intarr *ib, char **argv);
+void	al_3(t_intarr *ia, t_intarr *ib, int max_a);
 void	al_4(t_intarr *ia, t_intarr *ib, char **argv);
 int		absolute(int x);
 void	set_direction(t_node *cheapest, int way_a, int way_b);

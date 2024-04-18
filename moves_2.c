@@ -6,28 +6,57 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 20:40:15 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/17 23:28:07 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/18 23:52:52 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps.h"
 
+void	perform_dbl_mvs(t_intarr *ia, t_intarr *ib, t_node *cpst)
+{
+	if (cpst->rb_dir == cpst->ra_dir)
+	{
+		if (cpst->rb_dir == 1)
+		{
+			while (cpst->rbs != 0 && cpst->ras != 0)
+			{
+				rotate(ia, 1);
+				rotate(ib, 1);
+				cpst->ras--;
+				cpst->rbs--;
+			}
+		}
+		else
+		{
+			while (cpst->rbs != 0 && cpst->ras != 0)
+			{
+				rrotate(ia, 1);
+				rrotate(ib, 1);
+				cpst->ras--;
+				cpst->rbs--;
+			}
+		}
+	}
+}
+
 void	meet_buddies(t_intarr *ia, t_intarr *ib, t_node *cpst)
 {
+	print_arrays(ia, ib, ia->len + ib->len + 1);
+	perform_dbl_mvs(ia, ib, cpst);
 	while(cpst->rbs > 0)
 	{
 		if (cpst->rb_dir == 1)
-			rotate(ib);
+			rotate(ib, 0);
 		else
-			rrotate(ib);
+			rrotate(ib, 0);
 		cpst->rbs--;
 	}
 	while(cpst->ras > 0)
 	{
 		if (cpst->ra_dir == 1)
-			rotate(ia);
+			rotate(ia, 0);
 		else
-			rrotate(ia);
+			rrotate(ia, 0);
 		cpst->ras--;
 	}
 	push(ib, ia);
@@ -110,7 +139,7 @@ void	move_nearest(t_intarr *ia)
 	{
 		while (s != 0)
 		{
-			rotate(ia);
+			rotate(ia, 0);
 			s--;
 		}
 	}
@@ -118,7 +147,7 @@ void	move_nearest(t_intarr *ia)
 	{
 		while (s != ia->len)
 		{
-			rrotate(ia);
+			rrotate(ia, 0);
 			s++;
 		}
 	}
