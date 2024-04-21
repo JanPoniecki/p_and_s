@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 20:16:44 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/21 22:12:36 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/21 22:52:52 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	check_args(char **argv, t_intarr *ia, t_intarr *ib)
 			i++;
 		}
 		if ((*argv)[i - 1] == '-')
+			end_program("Error\n", ia, ib);
+		if (ft_atoi_long(*argv) > 2147483647 || ft_atoi_long(*argv) < -2147483648)
 			end_program("Error\n", ia, ib);
 		argv++;
 	}
