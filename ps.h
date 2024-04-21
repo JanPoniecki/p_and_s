@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 20:55:31 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/21 10:46:42 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/21 17:14:46 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,8 @@ typedef struct s_intarr
 	int		len;
 	int		*ints;
 	int		sorting;
-	char	col;
 	int		args;
-	int		moves_count;
 	int		max;
-	int		min;
 }	t_intarr;
 
 typedef struct s_node

@@ -6,39 +6,13 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 18:49:35 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/21 12:18:47 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/21 19:59:33 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps.h"
 
-int	absolute(int x)
-{
-	if (x >= 0)
-		return (x);
-	else
-		return (-x);
-}
-
-void	finish_me(t_intarr *ia)
-{
-	int	i;
-
-	i = 0;
-	while(ia->ints[i] != 10)
-		i++;
-	if (i <= ia->len - i)
-	{
-		while(ia->ints[0] != 10)
-			rotate(ia, 0);
-	}
-	else
-	{
-		while(ia->ints[0] != 10)
-			rrotate(ia, 0);
-	}
-}
-
+// used
 void	init_tch(t_node *tch)
 {
 	tch->rbs = 0;
@@ -50,6 +24,24 @@ void	init_tch(t_node *tch)
 	tch->sum = 0;
 }
 
+// used
+int	find_max(t_intarr *ib)
+{
+	int	i;
+	int	m;
+
+	i = 0;
+	m = 0;
+	while (i < ib->len)
+	{
+		if (ib->ints[i] > ib->ints[m])
+			m = i;
+		i++;
+	}
+	return (m);
+}
+
+// used
 int	search_closest_b(t_intarr *ia, t_intarr *ib, t_node *tch, int a)
 {
 	int	j;
@@ -70,9 +62,12 @@ int	search_closest_b(t_intarr *ia, t_intarr *ib, t_node *tch, int a)
 		}
 		j++;
 	}
+	if (number == 0)
+		return (find_max(ib));
 	return (c);
 }
 
+// used
 void	sum_rs(t_node *tch)
 {
 	if (tch->ras >= tch->rbs)
@@ -90,6 +85,7 @@ void	sum_rs(t_node *tch)
 	tch->sum = tch->ras + tch->rbs + tch->rras + tch->rrbs + tch->rrs + tch->rrrs;
 }
 
+// used
 void	cpy_tch_2_ch(t_node *tch, t_node *ch)
 {
 	ch->ras = tch->ras;
@@ -101,6 +97,7 @@ void	cpy_tch_2_ch(t_node *tch, t_node *ch)
 	ch->sum = tch->sum;
 }
 
+// used
 void	find_a_buddy(t_intarr *ia, t_intarr *ib, t_node *ch, int i)
 {
 	t_node	tch;
@@ -121,6 +118,7 @@ void	find_a_buddy(t_intarr *ia, t_intarr *ib, t_node *ch, int i)
 		cpy_tch_2_ch(&tch, ch);
 }
 
+// used
 void	make_moves(t_node *ch, t_intarr *ia, t_intarr *ib)
 {
 	while (ch->ras > 0)
@@ -144,6 +142,7 @@ void	make_moves(t_node *ch, t_intarr *ia, t_intarr *ib)
 	push(ia, ib);
 }
 
+// used
 void	move_2_b(t_intarr *ia, t_intarr *ib, t_node *ch, int i)
 {
 	ch->sum = 2147483647;
@@ -152,75 +151,78 @@ void	move_2_b(t_intarr *ia, t_intarr *ib, t_node *ch, int i)
 		find_a_buddy(ia, ib, ch, i);
 		i++;
 	}
-	print_arrays(ia, ib, ia->len + ib->len + 1);
-	print_cheapest(ch);
 	make_moves(ch, ia, ib);
-	print_arrays(ia, ib, ia->len + ib->len + 1);
-	ft_printf("--------------------------------------------------------------\n");
-	// print_cheapest(ch);
-	// exit(0);
 }
 
+// used
 void	move_2_a(t_intarr *ia, t_intarr *ib)
 {
 	if (ib->ints[0] > ia->ints[ia->len - 1] || ia->ints[ia->len - 1] == ia->max)
 		push(ib, ia);
 	else
 		rrotate(ia, 0);
-	print_arrays(ia, ib, ia->len + ib->len + 1);
 }
 
-void	find_zero(t_intarr *ib)
+// used
+void	find_min(t_intarr *ib, int i)
 {
-	int	i;
+	int	min;
+	int	nr;
 
-	i = 0;
-	while (ib->ints[i] != 0)
-		i++;
-	if (i <= ib->len - i)
+	min = 0;
+	nr = ib->ints[0];
+	while (i < ib->len)
 	{
-		while (ib->ints[ib->len - 1] != 0)
+		if (ib->ints[i] < ib->ints[min])
+		{
+			min = i;
+			nr = ib->ints[min];
+		}
+		i++;
+	}
+	if (min <= ib->len - i)
+	{
+		while (ib->ints[ib->len - 1] != nr)
 			rotate(ib, 0);
 	}
 	else
 	{
-		while (ib->ints[ib->len - 1] != 0)
+		while (ib->ints[ib->len - 1] != nr)
 			rrotate(ib, 0);
 	}
 }
 
+// used
 void	al_4(t_intarr *ia, t_intarr *ib, char **argv)
 {
 	t_node	cheapest;
 	int		max_a;
 
-	// if (ia->ints[0] > ia->ints[1])
-	// {
-	// 	ib->min = ia->ints[1];
-	// 	ib->max = ia->ints[0];
-	// }
-	// else
-	// {
-	// 	ib->min = ia->ints[0];
-	// 	ib->max = ia->ints[1];
-	// }
-	while (ib->len < 3)
-		push(ia, ib);
+	while (ib->len < 2)
+			push(ia, ib);
 	if (ib->ints[0] < ib->ints[1])
 		swap(ib, ia);
 	while (ia->len > 3)
 		move_2_b(ia, ib, &cheapest, 0);
 	al_3(ia, ib);
-	find_zero(ib);
+	find_min(ib, 0);
 	if (ia->ints[ia->len - 1] == ia->max)
 		rrotate(ia, 0);
-	while (ib->len > 1)
+	while (ib->len > 0)
 		move_2_a(ia, ib);
-	print_arrays(ia, ib, ia->len + ib->len + 1);
 }
 
+// used
 void	al_3(t_intarr *ia, t_intarr *ib)
 {
+	if (ia->len == 1)
+		return;
+	if (ia->len == 2)
+	{
+		if (ia->ints[0] > ia->ints[1])
+			swap(ia, ib);
+		return;
+	}
 	if (ia->ints[0] < ia->ints[2] && ia->ints[2] < ia->ints[1])
 	{
 		rrotate(ia, 0);

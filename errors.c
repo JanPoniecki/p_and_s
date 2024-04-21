@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 20:16:44 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/20 19:05:52 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/21 20:01:20 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,15 @@ void	end_program(char *er, t_intarr *ia, t_intarr *ib)
 	{
 		free(ia->ints);
 		free(ib->ints);
+		exit(0);
 	}
 	else
 	{
 		free(ia->ints);
 		free(ib->ints);
 		ft_putstr_fd(er, 2);
+		exit(EXIT_FAILURE);
 	}
-	exit(EXIT_FAILURE);
 }
 
 char	*check_args(char **argv, t_intarr *ia, t_intarr *ib)

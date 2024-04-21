@@ -6,57 +6,29 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 20:47:07 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/21 12:21:48 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/21 20:02:18 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps.h"
 
-int	is_sorted(t_intarr *ia)
+void	finish_me(t_intarr *ia)
 {
 	int	i;
 
-	if (ia->sorting == 1)
+	i = 0;
+	while (ia->ints[i] != 1)
+		i++;
+	if (i <= ia->len - i)
 	{
-		i = 0;
-		while (i < ia->len - 1)
-		{
-			if (ia->ints[i] + 1 != ia->ints[i + 1])
-				return (0);
-			i++;
-		}
+		while (ia->ints[0] != 1)
+			rotate(ia, 0);
 	}
 	else
 	{
-		i = 0;
-		while (i < ia->len)
-		{
-			if (ia->ints[i] < ia->ints[i + 1])
-				return (0);
-			i++;
-		}
+		while (ia->ints[0] != 1)
+			rrotate(ia, 0);
 	}
-	return (1);
-}
-
-int	swap_will_sort(t_intarr *ia)
-{
-	int	temp;
-	int	res;
-
-	if (ia->len < 2)
-		return (0);
-	temp = ia->ints[0];
-	ia->ints[0] = ia->ints[1];
-	ia->ints[1] = temp;
-	if (is_sorted(ia) == 0)
-		res = 0;
-	else
-		res = 1;
-	temp = ia->ints[0];
-	ia->ints[0] = ia->ints[1];
-	ia->ints[1] = temp;
-	return (res);
 }
 
 int	main(int argc, char **argv)
@@ -64,25 +36,25 @@ int	main(int argc, char **argv)
 	t_intarr	iaa;
 	t_intarr	iab;
 
-	print_args(argv, argc);
 	iaa.ints = ft_calloc(argc, sizeof(int));
 	iaa.len = argc -1;
 	iaa.sorting = 1;
 	iaa.args = argc;
 	iaa.max = argc - 1;
 	iab.ints = ft_calloc(argc - 1, sizeof(int));
-	iab.len = 1;
+	iab.len = 0;
 	ft_bzero(iab.ints, (argc - 1) * 4);
-	// ft_memset(&(iab.ints[0]), 111, (argc - 1) * 4);
-	iab.ints[0] = 0;
+	// iab.ints[0] = 0;
 	iab.sorting = -1;
 	check_args(argv, &iaa, &iab);
 	fill_up_array(&iaa, argv);
 	simplify_array(&iaa);
+	// print_arrays(&iaa, &iab, argc);
 	if (argc <= 4)
 		al_3(&iaa, &iab);
 	else
 		al_4(&iaa, &iab, argv);
-	print_arrays(&iaa, &iab, iaa.len + iab.len + 1);
+	finish_me(&iaa);
+	// print_arrays(&iaa, &iab, argc);
 	end_program(NULL, &iaa, &iab);
 }
