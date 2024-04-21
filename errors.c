@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 20:16:44 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/21 20:01:20 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/21 22:12:36 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 
 void	end_program(char *er, t_intarr *ia, t_intarr *ib)
 {
-	int	n;
-	int	i;
-
-	n = 0;
-	i = 0;
 	if (!er)
 	{
 		free(ia->ints);
@@ -34,7 +29,7 @@ void	end_program(char *er, t_intarr *ia, t_intarr *ib)
 	}
 }
 
-char	*check_args(char **argv, t_intarr *ia, t_intarr *ib)
+void	check_args(char **argv, t_intarr *ia, t_intarr *ib)
 {
 	int	i;
 
@@ -42,7 +37,7 @@ char	*check_args(char **argv, t_intarr *ia, t_intarr *ib)
 	while (*argv)
 	{
 		i = 0;
-		while((*argv)[i])
+		while ((*argv)[i])
 		{
 			if (ft_isdigit((*argv)[i]) == 0 && (*argv)[i] != '-')
 				end_program("Error\n", ia, ib);

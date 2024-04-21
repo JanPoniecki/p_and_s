@@ -6,43 +6,13 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 18:49:35 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/21 19:59:33 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/21 22:19:21 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps.h"
 
-// used
-void	init_tch(t_node *tch)
-{
-	tch->rbs = 0;
-	tch->ras = 0;
-	tch->rrbs = 0;
-	tch->rras = 0;
-	tch->rrs = 0;
-	tch->rrrs = 0;
-	tch->sum = 0;
-}
-
-// used
-int	find_max(t_intarr *ib)
-{
-	int	i;
-	int	m;
-
-	i = 0;
-	m = 0;
-	while (i < ib->len)
-	{
-		if (ib->ints[i] > ib->ints[m])
-			m = i;
-		i++;
-	}
-	return (m);
-}
-
-// used
-int	search_closest_b(t_intarr *ia, t_intarr *ib, t_node *tch, int a)
+int	search_closest_b(t_intarr *ib, int a)
 {
 	int	j;
 	int	number;
@@ -68,36 +38,6 @@ int	search_closest_b(t_intarr *ia, t_intarr *ib, t_node *tch, int a)
 }
 
 // used
-void	sum_rs(t_node *tch)
-{
-	if (tch->ras >= tch->rbs)
-		tch->rrs = tch->rbs;
-	else
-		tch->rrs = tch->ras;
-	if (tch->rras >= tch->rrbs)
-		tch->rrrs = tch->rrbs;
-	else
-		tch->rrrs = tch->rras;
-	tch->ras -= tch->rrs;
-	tch->rbs -= tch->rrs;
-	tch->rras -= tch->rrrs;
-	tch->rrbs -= tch->rrrs;
-	tch->sum = tch->ras + tch->rbs + tch->rras + tch->rrbs + tch->rrs + tch->rrrs;
-}
-
-// used
-void	cpy_tch_2_ch(t_node *tch, t_node *ch)
-{
-	ch->ras = tch->ras;
-	ch->rbs = tch->rbs;
-	ch->rras = tch->rras;
-	ch->rrbs = tch->rrbs;
-	ch->rrs = tch->rrs;
-	ch->rrrs = tch->rrrs;
-	ch->sum = tch->sum;
-}
-
-// used
 void	find_a_buddy(t_intarr *ia, t_intarr *ib, t_node *ch, int i)
 {
 	t_node	tch;
@@ -108,7 +48,7 @@ void	find_a_buddy(t_intarr *ia, t_intarr *ib, t_node *ch, int i)
 		tch.ras = i;
 	else
 		tch.rras = ia->len - i;
-	j = search_closest_b(ia, ib, &tch, ia->ints[i]);
+	j = search_closest_b(ib, ia->ints[i]);
 	if (j <= ib->len - j)
 		tch.rbs = j;
 	else
@@ -116,51 +56,6 @@ void	find_a_buddy(t_intarr *ia, t_intarr *ib, t_node *ch, int i)
 	sum_rs(&tch);
 	if (tch.sum < ch->sum)
 		cpy_tch_2_ch(&tch, ch);
-}
-
-// used
-void	make_moves(t_node *ch, t_intarr *ia, t_intarr *ib)
-{
-	while (ch->ras > 0)
-		ch->ras -= rotate(ia, 0);
-	while (ch->rbs > 0)
-		ch->rbs -= rotate(ib, 0);
-	while (ch->rrs > 0)
-	{
-		ch->rrs -= rotate(ia, 1);
-		rotate(ib, 1);
-	}
-	while (ch->rras > 0)
-		ch->rras -= rrotate(ia, 0);
-	while (ch->rrbs > 0)
-		ch->rrbs -= rrotate(ib, 0);
-	while (ch->rrrs > 0)
-	{
-		ch->rrrs -= rrotate(ia, 1);
-		rrotate(ib, 1);
-	}
-	push(ia, ib);
-}
-
-// used
-void	move_2_b(t_intarr *ia, t_intarr *ib, t_node *ch, int i)
-{
-	ch->sum = 2147483647;
-	while (i < ia->len)
-	{
-		find_a_buddy(ia, ib, ch, i);
-		i++;
-	}
-	make_moves(ch, ia, ib);
-}
-
-// used
-void	move_2_a(t_intarr *ia, t_intarr *ib)
-{
-	if (ib->ints[0] > ia->ints[ia->len - 1] || ia->ints[ia->len - 1] == ia->max)
-		push(ib, ia);
-	else
-		rrotate(ia, 0);
 }
 
 // used
@@ -193,18 +88,17 @@ void	find_min(t_intarr *ib, int i)
 }
 
 // used
-void	al_4(t_intarr *ia, t_intarr *ib, char **argv)
+void	al_4(t_intarr *ia, t_intarr *ib)
 {
 	t_node	cheapest;
-	int		max_a;
 
 	while (ib->len < 2)
-			push(ia, ib);
+		push(ia, ib);
 	if (ib->ints[0] < ib->ints[1])
-		swap(ib, ia);
+		swap(ib);
 	while (ia->len > 3)
 		move_2_b(ia, ib, &cheapest, 0);
-	al_3(ia, ib);
+	al_3(ia);
 	find_min(ib, 0);
 	if (ia->ints[ia->len - 1] == ia->max)
 		rrotate(ia, 0);
@@ -213,29 +107,29 @@ void	al_4(t_intarr *ia, t_intarr *ib, char **argv)
 }
 
 // used
-void	al_3(t_intarr *ia, t_intarr *ib)
+void	al_3(t_intarr *ia)
 {
 	if (ia->len == 1)
-		return;
+		return ;
 	if (ia->len == 2)
 	{
 		if (ia->ints[0] > ia->ints[1])
-			swap(ia, ib);
-		return;
+			swap(ia);
+		return ;
 	}
 	if (ia->ints[0] < ia->ints[2] && ia->ints[2] < ia->ints[1])
 	{
 		rrotate(ia, 0);
-		swap(ia, ib);
+		swap(ia);
 	}
 	if (ia->ints[0] < ia->ints[2] && ia->ints[1] < ia->ints[0])
-		swap(ia, ib);
+		swap(ia);
 	if (ia->ints[0] > ia->ints[2] && ia->ints[1] > ia->ints[0])
 		rrotate(ia, 0);
 	if (ia->ints[0] > ia->ints[1] && ia->ints[1] > ia->ints[2])
 	{
 		rotate(ia, 0);
-		swap(ia, ib);
+		swap(ia);
 	}
 	if (ia->ints[0] > ia->ints[2] && ia->ints[2] > ia->ints[1])
 		rotate(ia, 0);

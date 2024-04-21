@@ -6,11 +6,38 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 20:47:07 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/21 20:02:18 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/21 22:18:33 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps.h"
+
+int	is_sorted(t_intarr *ia)
+{
+	int	i;
+
+	if (ia->sorting == 1)
+	{
+		i = 0;
+		while (i < ia->len - 1)
+		{
+			if (ia->ints[i] + 1 != ia->ints[i + 1])
+				return (0);
+			i++;
+		}
+	}
+	else
+	{
+		i = 0;
+		while (i < ia->len)
+		{
+			if (ia->ints[i] < ia->ints[i + 1])
+				return (0);
+			i++;
+		}
+	}
+	return (1);
+}
 
 void	finish_me(t_intarr *ia)
 {
@@ -44,17 +71,17 @@ int	main(int argc, char **argv)
 	iab.ints = ft_calloc(argc - 1, sizeof(int));
 	iab.len = 0;
 	ft_bzero(iab.ints, (argc - 1) * 4);
-	// iab.ints[0] = 0;
 	iab.sorting = -1;
 	check_args(argv, &iaa, &iab);
 	fill_up_array(&iaa, argv);
 	simplify_array(&iaa);
-	// print_arrays(&iaa, &iab, argc);
-	if (argc <= 4)
-		al_3(&iaa, &iab);
-	else
-		al_4(&iaa, &iab, argv);
-	finish_me(&iaa);
-	// print_arrays(&iaa, &iab, argc);
+	if (is_sorted(&iaa) == 0)
+	{
+		if (argc <= 4)
+			al_3(&iaa);
+		else
+			al_4(&iaa, &iab);
+		finish_me(&iaa);
+	}
 	end_program(NULL, &iaa, &iab);
 }

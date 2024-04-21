@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 20:31:13 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/21 17:18:35 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/21 22:10:41 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	rrotate(t_intarr *ia, int dbl)
 	return (1);
 }
 
-void	swap(t_intarr *ia, t_intarr *ib)
+void	swap(t_intarr *ia)
 {
 	int	temp;
 
@@ -86,4 +86,27 @@ void	push(t_intarr *from, t_intarr *to)
 		ft_printf("pb\n");
 	else
 		ft_printf("pa\n");
+}
+
+void	make_moves(t_node *ch, t_intarr *ia, t_intarr *ib)
+{
+	while (ch->ras > 0)
+		ch->ras -= rotate(ia, 0);
+	while (ch->rbs > 0)
+		ch->rbs -= rotate(ib, 0);
+	while (ch->rrs > 0)
+	{
+		ch->rrs -= rotate(ia, 1);
+		rotate(ib, 1);
+	}
+	while (ch->rras > 0)
+		ch->rras -= rrotate(ia, 0);
+	while (ch->rrbs > 0)
+		ch->rrbs -= rrotate(ib, 0);
+	while (ch->rrrs > 0)
+	{
+		ch->rrrs -= rrotate(ia, 1);
+		rrotate(ib, 1);
+	}
+	push(ia, ib);
 }
