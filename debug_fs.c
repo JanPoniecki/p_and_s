@@ -6,11 +6,22 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 20:35:12 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/18 22:05:48 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/20 21:33:26 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps.h"
+
+void	print_cheapest(t_node *ch)
+{
+	ft_printf("ras: %d\n", ch->ras);
+	ft_printf("rbs: %d\n", ch->rbs);
+	ft_printf("rras: %d\n", ch->rras);
+	ft_printf("rrbs: %d\n", ch->rrbs);
+	ft_printf("rrs: %d\n", ch->rrs);
+	ft_printf("rrrs: %d\n", ch->rrrs);
+	ft_printf("sum: %d\n", ch->sum);
+}
 
 void	print_args(char **argv, int argc)
 {

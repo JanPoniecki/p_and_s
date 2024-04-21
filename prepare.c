@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 22:31:06 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/09 20:52:47 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/20 21:10:54 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	simplify_array(t_intarr *ia)
 	while (i < ia->len)
 	{
 		min = next_one(temp_arr, ia->len);
-		ia->ints[min] = i + 10;
+		ia->ints[min] = i + 1;
 		temp_arr[min] = 2147483647;
 		i++;
 	}

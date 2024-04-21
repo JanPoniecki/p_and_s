@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 20:40:15 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/18 23:52:52 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/19 20:19:52 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	perform_dbl_mvs(t_intarr *ia, t_intarr *ib, t_node *cpst)
 
 void	meet_buddies(t_intarr *ia, t_intarr *ib, t_node *cpst)
 {
-	print_arrays(ia, ib, ia->len + ib->len + 1);
 	perform_dbl_mvs(ia, ib, cpst);
 	while(cpst->rbs > 0)
 	{

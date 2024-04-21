@@ -6,7 +6,7 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 20:47:07 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/18 22:09:42 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/21 12:21:48 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,29 +65,24 @@ int	main(int argc, char **argv)
 	t_intarr	iab;
 
 	print_args(argv, argc);
-	iaa.moves = ft_calloc(10000, sizeof(char));
 	iaa.ints = ft_calloc(argc, sizeof(int));
 	iaa.len = argc -1;
 	iaa.sorting = 1;
-	iaa.next_n = -1;
 	iaa.args = argc;
-	iaa.moves_count = 0;
+	iaa.max = argc - 1;
 	iab.ints = ft_calloc(argc - 1, sizeof(int));
-	iab.len = 0;
+	iab.len = 1;
+	ft_bzero(iab.ints, (argc - 1) * 4);
+	// ft_memset(&(iab.ints[0]), 111, (argc - 1) * 4);
+	iab.ints[0] = 0;
 	iab.sorting = -1;
 	check_args(argv, &iaa, &iab);
-	al_4(&iaa, &iab, argv);
-/*	if (argc == 4)
-		al_3(&iaa, &iab, argv);
-	else if (al_1(&iaa, &iab, argv) <= al_2(&iaa, &iab, argv))
-	{
-		al_1(&iaa, &iab, argv);
-		ft_printf("chosen algorithm is A1\n");
-	}
+	fill_up_array(&iaa, argv);
+	simplify_array(&iaa);
+	if (argc <= 4)
+		al_3(&iaa, &iab);
 	else
-		ft_printf("chosen algorithm is A2\n");
-*/
-	// print_flat(&iaa, argc);
-	// print_arrays(&iaa, &iab, iaa.args);
+		al_4(&iaa, &iab, argv);
+	print_arrays(&iaa, &iab, iaa.len + iab.len + 1);
 	end_program(NULL, &iaa, &iab);
 }

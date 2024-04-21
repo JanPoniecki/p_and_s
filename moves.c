@@ -6,13 +6,13 @@
 /*   By: jponieck <jponieck@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 20:31:13 by jponieck          #+#    #+#             */
-/*   Updated: 2024/04/18 22:52:14 by jponieck         ###   ########.fr       */
+/*   Updated: 2024/04/20 22:26:26 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps.h"
 
-void	rotate(t_intarr *ia, int dbl)
+int	rotate(t_intarr *ia, int dbl)
 {
 	int	temp;
 	int	i;
@@ -34,9 +34,10 @@ void	rotate(t_intarr *ia, int dbl)
 	}
 	else if (ia->sorting == 1)
 		ft_printf("rr\n");
+	return (1);
 }
 
-void	rrotate(t_intarr *ia, int dbl)
+int	rrotate(t_intarr *ia, int dbl)
 {
 	int	temp;
 	int	i;
@@ -58,6 +59,7 @@ void	rrotate(t_intarr *ia, int dbl)
 	}
 	else if (ia->sorting == 1)
 		ft_printf("rrr\n");
+	return (1);
 }
 
 void	swap(t_intarr *ia, t_intarr *ib)
